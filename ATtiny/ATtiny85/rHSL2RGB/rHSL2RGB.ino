@@ -50,11 +50,11 @@ int HSLToRGB(float h, float s, float l, char color){
     b = HueToRGB(p, q, h - 1 / 3.0);
   }
   
-  if(color == "r") {
+  if(color == 'r') {
     return round(r*255);
-  } else if(color == "g") {
+  } else if(color == 'g') {
     return round(g*255);
-  } else if(color == "b") {
+  } else if(color == 'b') {
     return round(b*255);
   }
 }
@@ -83,9 +83,9 @@ void loop() {
     s = random(sl, sh) / smax;
     l = random(ll, lh) / lmax;  
 
-    r = HSLToRGB(h, s, l, "r");
-    g = HSLToRGB(h, s, l, "g");
-    b = HSLToRGB(h, s, l, "b");
+    r = HSLToRGB(h, s, l, 'r');
+    g = HSLToRGB(h, s, l, 'g');
+    b = HSLToRGB(h, s, l, 'b');
 
     randomize = false;
   }
