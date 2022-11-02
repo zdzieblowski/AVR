@@ -1,6 +1,6 @@
-// rHSL2RGB version 1.0
-// random HSL to RGB output
-// © 2021 enzyme42.com
+// rHSL2aRGB version 1.0
+// random HSL to analog RGB output
+// © 2021+ enzyme42.com
 
 float hl = 0;
 float hh = 360;
