@@ -1,2 +1,2 @@
 # AVR
-Atmel AVR Microcontrollers
+AVR Microcontrollers
