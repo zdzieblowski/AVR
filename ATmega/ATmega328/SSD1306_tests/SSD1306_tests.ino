@@ -31,8 +31,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 //   B01111100, B11110000,
 //   B01110000, B01110000,
 //   B00000000, B00110000 };
-
+int clicks = 0;
 void setup() {
+  
+
   Serial.begin(115200);
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -97,6 +99,29 @@ void setup() {
 }
 
 void loop() {
+
+  // Serial.begin(115200);
+  float vol4 = (analogRead(A0) * (5.0 / 1023.0));
+  float vol5 = (analogRead(A1) * (5.0 / 1023.0));
+
+  
+  
+
+  if(vol4 > 3){
+    Serial.println("vol4:");
+    Serial.println(vol4);
+    
+    clicks -= 1;
+    testdrawstyles();
+  }
+  if(vol5 > 3){
+    Serial.println("vol5:");
+    Serial.println(vol5);
+
+    clicks += 1;
+    testdrawstyles();
+  }
+
 }
 
 // void testdrawline() {
@@ -302,6 +327,8 @@ void testdrawstyles(void) {
   display.setTextSize(2);             // Draw 2X-scale text
   display.setTextColor(WHITE);
   display.print(F("0x")); display.println(0xDEADBEEF, HEX);
+  display.setTextSize(1); 
+  display.println(clicks);
 
   display.display();
   delay(2000);
