@@ -12,7 +12,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 bool left = false;
 bool right = false;
 
+bool do_refresh = false;
+
 int clicks = 0;
+
 void setup() {
 
   Serial.begin(115200);
@@ -22,39 +25,46 @@ void setup() {
     for(;;);
   }
 
-  testdrawstyles();
-
+  refreshdisplay();
 }
 
 void loop() {
-  float vola = (analogRead(A0) * (5.0 / 1024.0));
-  float volb = (analogRead(A1) * (5.0 / 1024.0));
+  float vol_a = (analogRead(A0) * (5.0 / 1024.0));
+  float vol_b = (analogRead(A1) * (5.0 / 1024.0));
   
-  // Serial.println(vola);
-  // Serial.println(volb);
+  // Serial.println(vol_a);
+  // Serial.println(vol_b);
 
-  if(vola >= 3.1337){    
+  if(vol_a >= 3.1337){    
     if(!left){
       clicks -= 1;
-      testdrawstyles();
+      do_refresh = true;
       left = true;
     }
   } else {
-    left=false;
+    left = false;
   }
-  if(volb >= 3.1337){
 
+  if(vol_b >= 3.1337){
     if(!right){
       clicks += 1;
-      testdrawstyles();
+      do_refresh = true;
       right = true;
     }
   }else{
-      right=false;
-    }
+    right = false;
+  }
+
+  // 
+
+  if(do_refresh){
+    do_refresh = false;
+    refreshdisplay();
+  }
+
 }
 
-void testdrawstyles(void) {
+void refreshdisplay(void) {
   display.clearDisplay();
 
   display.setTextSize(2);             // Normal 1:1 pixel scale
